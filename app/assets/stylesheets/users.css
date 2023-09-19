@@ -1,0 +1,69 @@
+.user_list {
+    margin: 20px;
+}
+
+.user_list_entry {
+    margin: 10px;
+    font-size: 1.75em;
+}
+
+.warning {
+    margin: 20px;
+    color: darkred;
+}
+
+#name_field {
+    width: 20%;
+    padding: 12px 20px;
+    margin-top: 5px;
+    margin-left: 20px;
+    box-sizing: border-box;
+}
+
+#submit {
+    background-color: #e7e9eb;
+    border: none;
+    color: black;
+    padding: 16px 32px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+#label {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.err {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#key_info {
+    width: 70%;
+    font-size: 1em;
+    text-align: center;
+    margin: auto auto 20px;
+}
+
+#private_key_field {
+    font-size: .75em;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+    #name_field {
+        width: 80%;
+    }
+
+    #key_info {
+        font-size: 1em;
+        width: 100%;
+    }
+
+    #private_key_field {
+        width: auto;
+    }
+}

@@ -1,0 +1,38 @@
+label {
+    margin-left: 20px;
+}
+
+textarea {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+input[type=button] {
+    background-color: #e7e9eb;
+    border: none;
+    color: black;
+    padding: 16px 32px;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+p {
+    margin-left: 20px;
+}
+
+#result {
+    width: 80%;
+    font-style: italic;
+}
+
+.not_found {
+    margin-left: 20px;
+    color: darkred;
+    width: 75%;
+}
+
+@media screen and (max-width: 600px) {
+    textarea {
+        width: 70%;
+    }
+}

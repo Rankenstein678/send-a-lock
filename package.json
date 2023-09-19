@@ -1,0 +1,7 @@
+{
+  "name": "smv-1984",
+  "version": "1.0.0",
+  "dependencies": {
+    "openpgp": "^5.10.2"
+  }
+}

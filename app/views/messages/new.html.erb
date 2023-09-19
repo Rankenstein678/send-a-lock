@@ -1,0 +1,36 @@
+<%= stylesheet_link_tag params[:controller] %>
+
+<h1>Nachricht für <%= @user.name %></h1>
+
+<%= form_with model: @message, html: { :id => "form" } do |form| %>
+  <div>
+    <%= form.label :content %><br>
+    <%= form.text_area :content, size: "70x5", id: "message_area" %>
+    <% @message.errors.full_messages_for(:content).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+<% end %>
+
+<input type="button" value="Erstellen" onclick="beforeSubmit();"/>
+
+<script>
+
+    beforeSubmit = async function () {
+        const cleartext = document.getElementById('message_area').value;
+
+        //Zwar umgehbar aber verhindert zu frühres Einsenden
+        if (cleartext === "") {
+            alert("Bitte gib eine Nachricht ein");
+        } else {
+            const public_key = await openpgp.readKey({armoredKey: `<%= @user.public_key %>`});
+
+            document.getElementById('message_area').value = await openpgp.encrypt({
+                message: await openpgp.createMessage({text: cleartext}), // input as Message object
+                encryptionKeys: public_key,
+            });
+
+            $("#form").submit();
+        }
+    }
+</script>

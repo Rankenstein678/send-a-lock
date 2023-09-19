@@ -1,0 +1,100 @@
+<%= stylesheet_link_tag params[:controller] %>
+
+
+<h1><img id="eye" src="<%= image_url("literally_smv.svg") %>"> Das V in SMV steht für
+  Nineteen-Eighty-<strong>V(F)our!</strong></h1>
+
+
+<div class="row">
+  <div class="column">
+    <h2><a href="/users/new">Registrieren</a></h2>
+    <p>
+      Erstelle einen Account, um in die Empfängerliste aufgenommen zu werden und
+      Nachrichten empfangen zu können. Keine Email benötigt!
+    </p>
+  </div>
+  <div class="column">
+    <h2><a href="/users/">Senden</a></h2>
+    <p>
+      Versende eine Nachricht an einen registrierten Empfänger ganz ohne Account!
+    </p>
+  </div>
+  <div class="column">
+    <h2>Empfangen</h2>
+    <p>
+      Gib den <strong>3-Wort-Code</strong> einer Nachricht ein und entschlüssle sie mit deinem privaten Schlüssel.
+    </p>
+
+    <%= form_with url: "/messages/search", method: :get do |form| %>
+      <%= form.text_field :address, id: "address_field" %>
+      <%= form.submit "Search", id: "search_btn" %>
+    <% end %>
+
+  </div>
+</div>
+
+<div class="faq">
+  <h2>FAQ</h2>
+  <ul>
+    <li>
+      <h3>Wie funktioniert __PLACEHOLDERNAME__?</h3>
+      <p>
+        Nachdem du dich als Empfänger registriert hast, erhältst du deinen <strong>privaten Schlüssel</strong>.
+        Du brauchst deinen Schlüssel, um an dich adressierte Nachrichten zu entschlüsseln. Speichere ihn daher
+        an einem sicheren Ort. Sobald du registriert bist, tauchst du in der Empfängerliste auf. Von nun an kann
+        jede Person Nachrichten an dich schreiben. Wird dir eine Nachricht geschrieben, erhält der Empfänger einen
+        <strong>3-Wort-Code</strong>. Diesen kann der Sender auf einen Zettel schreiben und an dich versenden.
+        Du kannst diesen 3-Wort-Code eingeben und deine Nachricht mit deinem privaten Schlüssel entschlüsseln.
+      </p>
+    </li>
+    <li>
+      <h3>Wie sicher sind meine Nachrichten?</h3>
+      <p>
+        Deine Nachrichten landen niemals in entschlüsselter Form auf dem Server. Das Ver- und Entschlüsseln
+        geschieht rein lokal. Es ist mir nicht möglich die Nachrichten zu entschlüsseln.
+      </p>
+    </li>
+    <li>
+      <h3>Warum sollte ich dir mit meinen Nachrichten trauen?</h3>
+      <p>
+        Mein Code zum Ver- und Entschlüsseln ist in die Website eingebettet. Falls du Code lesen kannst, dann
+        könnte dir das helfen. Falls nicht, musst dir mir in diesem Fall vertrauen. Ich kann dich aber gerne durch
+        meinen Code führen und dir alles erklären. Generell kann ich aber garantieren, dass mir der Inhalt fremder
+        Vallentins- und Weihnachtsgrüße komplett egal ist.
+      </p>
+    </li>
+    <li>
+      <h3>Fördert die Website Mobbing?</h3>
+      <p>
+        Mobbing ist ein Problem, über das ich beim Erstellen der Website recht viel nachgedacht habe. Um es kurz zu
+        machen: Ja verschlüsselte Nachrichten haben das Potenzial für Mobbing missbraucht zu werden. Andererseits
+        kann auch die Praxis Schüler die Nachrichten anderer Schüler probelesen zu lassen zu mobbing führen.
+        Solltest du aber erwarten negative Nachrichten zu bekommen, dann bitte erstell keinen Account. Du kannst
+        Nachrichten mit Freunden auch auf anderen Wegen privat austauschen. Das bisschen Privatsphäre ist nicht
+        mehr wert, als deine mentale Gesundheit.
+      </p>
+    </li>
+    <li>
+      <h3>Ich hab meinen privaten Schlüssel verloren. Kann ich ihn zurückbekommen?</h3>
+      <p>
+        Leider nein. Ich habe keinen Zugriff auf deinen Schlüssel und kann da nichts machen. Tut mir leid :(
+      </p>
+    </li>
+    <li>
+      <h3>Warum sieht die Website so scheiße aus?</h3>
+      <p>
+        Ich bin kein Webdesigner.
+      </p>
+    </li>
+  </ul>
+</div>
+
+
+<script>
+    search = function () {
+        const text = document.getElementById("msg_address").value;
+        if (text != null) {
+            window.location.href = "/messages/" + text;
+        }
+    }
+</script>

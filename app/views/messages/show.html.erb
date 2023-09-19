@@ -1,0 +1,55 @@
+<%= stylesheet_link_tag params[:controller] %>
+
+<h1>Encrypted Message:</h1>
+
+<p>
+  Nachrichts Code: <strong><%= @message.address %></strong><br>
+</p>
+
+<p id=privkey_label>
+  Private Key:
+</p>
+<textarea id="privkey_input" rows="5" cols="33"></textarea><br>
+
+<input id="decrypt_btn" type="button" value="Decrypt" onclick="decrypt();"/><br>
+
+<p id=result></p>
+
+<div id="snackbar"></div>
+
+<script>
+    function showSnack(content) {
+        const snackbar = document.getElementById("snackbar");
+        snackbar.textContent = content;
+        snackbar.className = "show";
+        setTimeout(function () {
+            snackbar.className = snackbar.className.replace("show", "");
+        }, 3000);
+    }
+
+    async function decrypt() {
+        try {
+            const passphrase = "PASSKEY"; //Unsafe aber um Nutzer nicht durch 2fa abzuschrecken, nötig
+
+            const private_key = await openpgp.decryptKey({
+                privateKey: await openpgp.readPrivateKey({armoredKey: document.getElementById('privkey_input').value}),
+                passphrase: passphrase
+            });
+
+            const message = await openpgp.readMessage({
+                armoredMessage: `<%= @message.content %>`
+            });
+            const {data: decrypted} = await openpgp.decrypt({
+                message,
+                decryptionKeys: private_key
+            });
+            document.getElementById("result").textContent = decrypted;
+            document.getElementById("privkey_input").remove();
+            document.getElementById("privkey_label").remove();
+            document.getElementById("decrypt_btn").remove();
+        } catch {
+            showSnack("Decryption Error");
+        }
+    }
+
+</script>
