@@ -1,17 +1,19 @@
 #!/usr/bin/python3
-import smtplib, ssl, sys, os
+import os
+import smtplib
+import ssl
+import sys
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-
 if len(sys.argv) != 3:
-      raise Exception("Wrong number of arguments")
+    raise Exception("Wrong number of arguments")
 
 port = 587  # For starttls
 smtp_server = "smtp-mail.outlook.com"
-sender_email=os.environ['EMAIL_USER']
+sender_email = os.environ['EMAIL_USER']
 password = os.environ['EMAIL_PASSWORD']
-receiver_email=sys.argv[1]
+receiver_email = sys.argv[1]
 
 msg = MIMEMultipart('alternative')
 msg['Subject'] = "Email Bestätigung"
@@ -45,3 +47,4 @@ with smtplib.SMTP(smtp_server, port) as server:
     server.starttls(context=context)
     server.login(sender_email, password)
     server.sendmail(sender_email, receiver_email, msg.as_string())
+
