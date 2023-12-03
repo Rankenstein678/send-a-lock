@@ -41,6 +41,13 @@
     margin: auto auto 20px;
 }
 
+#verification_info {
+    width: 70%;
+    font-size: 1em;
+    text-align: center;
+    margin: auto auto 20px;
+}
+
 #private_key_field {
     font-size: .75em;
     width: 50%;
@@ -54,6 +61,11 @@
     }
 
     #key_info {
+        font-size: 1em;
+        width: 100%;
+    }
+
+    #verification_info {
         font-size: 1em;
         width: 100%;
     }

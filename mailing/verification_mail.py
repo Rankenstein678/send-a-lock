@@ -26,6 +26,7 @@ html = f"""\
 <html>
   <head></head>
   <body>
+    <h1>Willkommen bei Send-a-lock!</h1>
     <p>Klicke <a href="{sys.argv[2]}">hier</a>, um deinen Account zu aktivieren.</p>
   </body>
 </html>
