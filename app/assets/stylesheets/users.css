@@ -7,11 +7,6 @@
     font-size: 1.75em;
 }
 
-.warning {
-    margin: 20px;
-    color: darkred;
-}
-
 #email_field {
     width: 20%;
     padding: 12px 20px;
