@@ -14,6 +14,9 @@ class MessagesController < ApplicationController
     @message = Message.new
     begin
       @user = User.find(params[:user_id])
+      unless @user.verified
+        not_found
+      end
     rescue ActiveRecord::RecordNotFound
       not_found
     end

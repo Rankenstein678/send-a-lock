@@ -6,9 +6,9 @@
 
   <%= form.hidden_field :public_key, id: "public_key_field" %>
   <div>
-    <%= form.label :name, id: "label" %><br>
-    <%= form.text_field :name, id: "name_field" %>
-    <% @user.errors.full_messages_for(:name).each do |message| %>
+    <%= form.label :email, id: "label" %><br>
+    <%= form.text_field :email, id: "email_field" %>
+    <% @user.errors.full_messages_for(:email).each do |message| %>
       <div class="err"><%= message %></div>
     <% end %>
   </div>
@@ -61,26 +61,30 @@
 
     async function genKeys() {
 
-        const {privateKey, publicKey} = await openpgp.generateKey({
-            userIDs: [{
-                name: (document.getElementById("name_field").value),
-                email: (document.getElementById("name_field").value + '@1984.smv')
-            }],
-            passphrase: "PASSKEY" //Unsafe aber um Nutzer nicht durch 2fa abzuschrecken, nötig
-        });
 
+        try {
+            const {publicKey, privateKey} = await openpgp.generateKey({
+                userIDs: [{
+                    name: (document.getElementById("email_field").value),
+                    email: (document.getElementById("email_field").value)
+                }],
+                passphrase: "PASSKEY" //Unsafe aber um Nutzer nicht durch 2fa abzuschrecken, nötig
+            });
+            document.getElementById("public_key_field").value = publicKey;
 
-        document.getElementById("public_key_field").value = publicKey;
+            await copyToClipboard(privateKey);
 
-        await copyToClipboard(privateKey);
+            document.getElementById("form").submit();
 
-        document.getElementById("form").submit();
+            document.getElementById("email_field").disabled = "true";
+            document.getElementById("key_info").hidden = false;
+            document.getElementById("submit").disabled = "true";
+            document.getElementById("submit").style.color = "white";
+            document.getElementById("submit").style.borderStyle = "solid";
+        } catch (error) {
+            document.getElementById("form").submit();
+        }
 
-        document.getElementById("name_field").disabled = "true";
-        document.getElementById("key_info").hidden = false;
-        document.getElementById("submit").disabled = "true";
-        document.getElementById("submit").style.color = "white";
-        document.getElementById("submit").style.borderStyle = "solid";
 
     }
 </script>

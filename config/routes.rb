@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resources :messages, path_names: { new: 'new/:user_id' }
 
   resources :users
+  get "/users/:id/confirm/:code", to: "users#confirm"
+
 end

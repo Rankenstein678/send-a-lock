@@ -12,7 +12,7 @@
     color: darkred;
 }
 
-#name_field {
+#email_field {
     width: 20%;
     padding: 12px 20px;
     margin-top: 5px;
@@ -54,7 +54,7 @@
 }
 
 @media screen and (max-width: 600px) {
-    #name_field {
+    #email_field {
         width: 80%;
     }
 
