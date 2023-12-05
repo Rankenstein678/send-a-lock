@@ -37,3 +37,4 @@
 # Project exclude paths
 /log/
 /tmp/
+/config/credentials/production.key
