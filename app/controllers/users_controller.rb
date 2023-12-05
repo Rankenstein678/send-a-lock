@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   private
 
   def send_verification_email(user)
-    url = "http://#{Socket.ip_address_list.detect(&:ipv4_private?).try(:ip_address)}/users/#{user.id}/confirm/#{user.confirmation_code}"
+    url = "http://#{ENV['DOMAIN']}/users/#{user.id}/confirm/#{user.confirmation_code}"
     pid = fork { spawn("./mailing/verification_mail.py #{user.email} #{url}") }
     Process.detach(pid)
   end
